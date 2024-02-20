@@ -14,7 +14,6 @@ const schema = z.object({
     .max(100_000),
   Category: z.enum(categories, {
     errorMap: () => ({ message: "Category is required" }),
-    id: z.number(),
   }),
 });
 type FormData = z.infer<typeof schema>;

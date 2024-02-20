@@ -1,7 +1,7 @@
 // // import { useState, useCallback, useEffect, useRef } from "react";
 // // import Random from "./Random";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 // import { useState } from "react";
 
@@ -558,40 +558,276 @@ import { useEffect, useRef } from "react";
 
 //   // Function to add a new expense
 
-//   // Filter visible expenses based on selected category
-//   const visibleExpenses = selectedCategory
-//     ? expenses.filter((expense) => expense.category === selectedCategory)
-//     : expenses;
+// //   // Filter visible expenses based on selected category
+// //   const visibleExpenses = selectedCategory
+// //     ? expenses.filter((expense) => expense.category === selectedCategory)
+// //     : expenses;
 
+// //   return (
+// //     <div>
+// //       <div className="mb-3">
+// //         <div>
+// //           {/* Pass the addExpense function to the ProjectForm component */}
+
+// //           <ProjectForm
+// //             onSubmit={(data) =>
+// //               setExpenses([
+// //                 ...expenses,
+// //                 {
+// //                   id: expenses.length + 1,
+// //                   description: data.Description,
+// //                   amount: data.Amount,
+// //                   category: data.Category,
+// //                 },
+// //               ])
+// //             }
+// //           />
+
+// //           {/* Pass the onSelectCategory function to the ExpenseFilter component */}
+// //           <ExpenseFilter onSelectCategory={setSelectedCategory} />
+// //           {/* Pass the visibleExpenses and onDelete functions to the Expenselist component */}
+// //           <Expenselist
+// //             expenses={visibleExpenses}
+// //             onDelete={(id) =>
+// //               setExpenses(expenses.filter((e) => e.id !== id))
+// //             }
+// //           />
+// //         </div>
+// //       </div>
+// //     </div>
+// //   );
+// // }
+
+// // export default App;
+
+// ///////////////////Expense Tracker
+
+// // function App() {
+// //   const ref = useRef<HTMLInputElement>(null);
+// //   useEffect(() => {
+// //     if (ref.current) ref.current.focus();
+// //   });
+// //   //side Effect
+// //   useEffect(() => {
+// //     document.title = "My App";
+// //   });
+// //   return (
+// //     <div>
+// //       <input type="text" ref={ref} className="form-control" />
+// //     </div>
+// //   );
+// // }
+// // export default App;
+
+// // import React from "react";
+// // import { useState } from "react";
+// // import ProductList from "./ProductList";
+
+// // const App = () => {
+// //   const [Category, setCategory] = useState("");
+
+// //   return (
+// //     <div>
+// //       <select
+// //         name=""
+// //         id=""
+// //         className="form-select"
+// //         onChange={(event) => setCategory(event.target.value)}>
+// //         <option value=""></option>
+// //         <option value="Clothing">Clothing</option>
+// //         <option value="Household">Household</option>
+// //       </select>
+// //       <ProductList category={Category}></ProductList>
+// //     </div>
+// //   );
+// // };
+
+// // export default App;
+
+// // const connect=()=>console.log('Connecting');
+// // const disconnect=()=> console.log('Disconnecting');
+
+// function App(){
+
+//   useEffect(()=>{
+// connect();
+// return ()=>disconnect();
+
+//   })
+// // }
+// import axios from "axios";
+// import { literal } from "zod";
+// interface User{
+// id:number;
+// name:string;
+// }
+// function App() {
+//   const [users, setusers] = useState<User[]>([]);
+//   useEffect(() => {
+//     axios
+//       .get<User[]>("https://jsonplaceholder.typicode.com/users")
+//       .then( res=> setusers(res.data));
+//   },[]);
+//   return (<div>
+// <ul>
+//   {users.map(user=> <li key={user.id}>{user.name} </li>)}
+// </ul>
+//   </div>);
+// }
+// export default App;
+
+// import axios, { AxiosError, CanceledError } from "axios";
+// import apiClient from "./api-client";
+// import userService from "./services/user-service";
+// import { User } from "./services/user-service";
+// function App() {
+//   const [users, setusers] = useState<User[]>([]);
+//   const [error, setError] = useState("");
+//   const [isLoading, setLoading] = useState(false);
+
+//   useEffect(() => {
+//     // const controller = new AbortController();
+
+//     //get-> [promise -> res/err
+//     // const fetchusers = async () => {
+//     //   try{const res = await
+//     setLoading(true);
+//     const{request,cancel} = userService.getAllUsers() ;
+//     request.then((res) => {
+//         setusers(res.data);
+//         setLoading(false);
+//       })
+//       .catch((err) => {
+//         if (err instanceof CanceledError) setError(err.message);
+//         setLoading(false);
+//       });
+//     // .finally(()=> {
+//     //   setLoading(false);
+//     // });
+
+//     return () => cancel();
+//   }, []);
+
+//   const deleteUser = (user: User) => {
+//     const originalusers = [...users];
+//     setusers(users.filter((u) => u.id !== user.id));
+//     userService.getAllUser.delete("/users/" + user.id).catch((err) => {
+//       setError(err.message);
+//       setusers(originalusers);
+//     });
+//   };
+//   const addUser = () => {
+//     const originalusers = [...users];
+//     const newUser = { id: 0, name: "Mosh" };
+//     setusers([newUser, ...users]);
+//     apiClient
+//       .post("/users", newUser)
+//       .then(({ data: savedUser }) => setusers([savedUser, ...users]))
+//       .catch((err) => {
+//         setError(err.message);
+//         setusers(originalusers);
+//       });
+//   };
+//   const Updateuser = (user: User) => {
+//     const originalusers = [...users];
+
+//     const updatedUser = { ...user, name: user.name + "!" };
+//     setusers(users.map((u) => (u.id === user.id ? updatedUser : u)));
+//     apiClient.patch("/users/" + user.id, updatedUser).catch((err) => {
+//       setError(err.message);
+//       setusers(originalusers);
+//     });
+//   };
 //   return (
 //     <div>
-//       <div className="mb-3">
-//         <div>
-//           {/* Pass the addExpense function to the ProjectForm component */}
+//       {error && <p className="text-red-600">{error}</p>}
+//       <ul className="divide-y divide-gray-200">
+//         {users.map((user) => (
+//           <li key={user.id}>
+//             {user.name}{" "}
+//             <button
+//               className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+//               onClick={() => Updateuser(user)}>
+//               {" "}
+//               update
+//             </button>
+//           </li>
+//         ))}
+//         <div className="flex justify-center items-center">
+//           {isLoading && (
+//             <div className="w-16 h-16 border-4 border-gray-300 rounded-full animate-spin"></div>
+//           )}
+//         </div>
+//       </ul>
+//     </div>
+//   );
+// }
 
-//           <ProjectForm
-//             onSubmit={(data) =>
-//               setExpenses([
-//                 ...expenses,
-//                 {
-//                   id: expenses.length + 1,
-//                   description: data.Description,
-//                   amount: data.Amount,
-//                   category: data.Category,
-//                 },
-//               ])
-//             }
-//           />
+// // export default App;
+// import useCurrencyInfo from "./components/useCurrencyInfo";
+// import InputBox from "./components/InputBox";
+// function App() {
+//   const [amount, setAmount] = useState(0);
+//   const [from, setFrom] = useState("usd");
+//   const [to, setTo] = useState("inr");
+//   const [convertedAmount, setConvertedAmount] = useState(0);
+//   const currencyInfo = useCurrencyInfo(from);
+//   const options = Object.keys(currencyInfo);
+//   const convert = () => {
+//     setConvertedAmount(amount * currencyInfo[to]);
+//   };
+//   const swap = () => {
+//     setFrom(to);
+//     setTo(from);
+//     setConvertedAmount(amount);
+//     setAmount(convertedAmount);
+//   };
 
-//           {/* Pass the onSelectCategory function to the ExpenseFilter component */}
-//           <ExpenseFilter onSelectCategory={setSelectedCategory} />
-//           {/* Pass the visibleExpenses and onDelete functions to the Expenselist component */}
-//           <Expenselist
-//             expenses={visibleExpenses}
-//             onDelete={(id) =>
-//               setExpenses(expenses.filter((e) => e.id !== id))
-//             }
-//           />
+//   return (
+//     <div className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat">
+//       <div className="w-full">
+//         <div className="w-full max-w-md mx-auto border border-gray-60 rounded-lg p-5 backdrop-blur-sm bg-white/30">
+//           <form
+//             onSubmit={(e) => {
+//               e.preventDefault();
+//               convert();
+//             }}>
+//             <div className="w-full mb-1">
+//               <InputBox
+//                 label="from"
+//                 amount={amount}
+//                 currencyOptions={options}
+//                 onCurrencyChange={(currency) => setFrom(currency)}
+//                 onAmountChange={(amount) => setAmount(amount)}
+//                 selectedCurrency={from}
+//                 amountDisabled={false}
+//                 currencyDisabled={false}
+//                 className={""}></InputBox>
+//             </div>
+//             <div className="relative w-full h-0.5">
+//               <button
+//                 className="absolue left-11/2 -translate-x-1/2-translate-y-1/2 border-2 border-white rounded-md bg-blue-600 text-white px-2 py-0.5"
+//                 onClick={swap}>
+//                 Swap
+//               </button>
+//             </div>
+
+//             <div className="w-full mb-1">
+//               <InputBox
+//                 label="to"
+//                 amount={convertedAmount}
+//                 amountDisabled={true}
+//                 currencyOptions={options}
+//                 onCurrencyChange={(currency) => setTo(currency)}
+//                 onAmountChange={(amount) => setAmount(amount)}
+//                 selectedCurrency={to}
+//                 currencyDisabled={false}
+//                 className={""}></InputBox>
+//             </div>
+//             <button type="submit" className="w-full bg-blue">
+//               Convert {from} to {to}
+//             </button>
+//           </form>
 //         </div>
 //       </div>
 //     </div>
@@ -599,47 +835,8 @@ import { useEffect, useRef } from "react";
 // }
 
 // export default App;
-
-///////////////////Expense Tracker
-
-// function App() {
-//   const ref = useRef<HTMLInputElement>(null);
-//   useEffect(() => {
-//     if (ref.current) ref.current.focus();
-//   });
-//   //side Effect
-//   useEffect(() => {
-//     document.title = "My App";
-//   });
-//   return (
-//     <div>
-//       <input type="text" ref={ref} className="form-control" />
-//     </div>
-//   );
-// }
-// export default App;
-
-import React from "react";
-import { useState } from "react";
-import ProductList from "./ProductList";
-
-const App = () => {
-  const [Category, setCategory] = useState("");
-
-  return (
-    <div>
-      <select
-        name=""
-        id=""
-        className="form-select"
-        onChange={(event) => setCategory(event.target.value)}>
-        <option value=""></option>
-        <option value="Clothing">Clothing</option>
-        <option value="Household">Household</option>
-      </select>
-      <ProductList category={Category}></ProductList>
-    </div>
-  );
-};
-
+import Layout1 from "./components/Layout1";
+function App() {
+  return <Layout1></Layout1>;
+}
 export default App;
