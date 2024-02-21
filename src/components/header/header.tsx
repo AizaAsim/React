@@ -1,6 +1,7 @@
 import React from "react";
-
 import { Link } from "react-router-dom";
+
+// import { Link } from "react-router-dom";
 const header = () => {
   return (
     <header className="sjadow stickt z-50 top-0">
@@ -8,6 +9,11 @@ const header = () => {
         <div className="flex flex-wrap justify-between items-center mx-auto mx-w-screen-xl">
           <Link to="/" className="flex items-center">
             {" "}
+            <img
+              src="https://alexharkness.com/wp-content/uploads/2020/06/logo-2.png"
+              className="mr-3 h-12"
+              alt="Logo"
+            />
           </Link>{" "}
         </div>
       </nav>

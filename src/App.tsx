@@ -835,8 +835,60 @@ import { useEffect, useRef, useState } from "react";
 // }
 
 // export default App;
-import Layout1 from "./components/Layout1";
+// import Layout1 from "./components/Layout1";
+// function App() {
+//   return <Layout1></Layout1>;
+// }
+// export default App;import React, { useState } from 'react';
+import List from "./Project2/components/List";
+import Filter from "./Project2/components/Filter";
+import Form4 from "./Project2/Form4";
 function App() {
-  return <Layout1></Layout1>;
+  const [Expenses, SetExpenses] = useState([
+    {
+      id: 1,
+      description: "aaa",
+      Amount: 1,
+      Category: "Groceries",
+    },
+    {
+      id: 2,
+      description: "aaa",
+      Amount: 11,
+      Category: "Groceries",
+    },
+  ]);
+
+  const [Category, SetCategory] = useState("");
+
+  const visibleExpenses = Category
+    ? Expenses.filter((e) => e.Category === Category)
+    : Expenses;
+
+  return (
+    <>
+      <Form4
+        onSubmit={(res) => {
+          SetExpenses([
+            ...Expenses,
+            {
+              ...res,
+              id: Expenses.length + 1,
+              description: res.Description,
+              Amount: res.Amount,
+              Category: res.Category,
+            },
+          ]);
+        }}></Form4>
+      <Filter onSelectCategory={(category) => SetCategory(category)} />
+      <List
+        expenses={visibleExpenses}
+        OnDelete={(res) =>
+          SetExpenses(visibleExpenses.filter((e) => e.id !== res))
+        }
+      />
+    </>
+  );
 }
+
 export default App;
